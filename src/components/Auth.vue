@@ -1,18 +1,23 @@
 <template>
-  <div class="auth">
-    <div v-if="userStatus" key="login" class="navbar-item">
-      <p class="navbar-item">{{ user.displayName }}</p>
-      <button type="button" @click="doLogout">
-        Sign out
-      </button>
-    </div>
-    <div v-else key="logout">
-      <button type="button" class="google-button" @click="doLogin">
-        <span class="google-button__icon"> </span>
-        <span class="google-button__text">Sign in with Google</span>
-      </button>
-    </div>
-  </div>
+  <v-container>
+    <v-layout text-xs-center wrap>
+      <v-flex xs12 mb-5>
+        <v-layout justify-center>
+          <div v-if="userStatus" key="login">
+            <p class="navbar-item">{{ user.displayName }}</p>
+            <v-btn color="info" @click="doLogout">
+              Sign out
+            </v-btn>
+          </div>
+          <div v-else key="logout">
+            <v-btn color="info" @click="doLogin">
+              Sign in with Google
+            </v-btn>
+          </div>
+        </v-layout>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script lang="ts">

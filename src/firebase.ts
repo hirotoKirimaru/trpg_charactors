@@ -16,7 +16,7 @@ export default {
     firebase.initializeApp(config);
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
   },
-  login(): void{
+  login(): void {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider);
   },

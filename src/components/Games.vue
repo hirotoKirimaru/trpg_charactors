@@ -18,13 +18,12 @@
           </td>
           <td>
             <v-btn color="warning" @click="deleteGame">削除</v-btn>
-            <v-btn color="warning">Warning</v-btn>
           </td>
         </tr>
       </tbody>
     </table>
-    <button class="" @click="delGame">追加</button>
-    <button class="" @click="saveGames">保存</button>
+    <v-btn class="" @click="delGame">追加</v-btn>
+    <v-btn class="" @click="saveGames">保存</v-btn>
   </div>
 </template>
 

@@ -1,8 +1,13 @@
 <template>
-  <div id="app">
-    <Auth />
-    <router-view />
-  </div>
+  <v-app>
+    <v-toolbar app>
+      <Auth />
+    </v-toolbar>
+
+    <v-content>
+      <router-view />
+    </v-content>
+  </v-app>
 </template>
 
 <script lang="ts">
