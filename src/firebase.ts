@@ -27,7 +27,7 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       user = user ? user : null;
       store.commit("onAuthStateChanged", user);
-      
+
       let userStatus = user === null ? false : true;
       store.commit("onUserStatusChanged", userStatus);
     });
