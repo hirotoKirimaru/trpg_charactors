@@ -11,7 +11,7 @@
       <tbody>
         <tr v-for="charactor in charactors" :key="charactor.id">
           <td>{{ charactor.id }}</td>
-          <td>{{ charactor.gameId }}</td>
+          <td>{{ charactor.game }}</td>
           <td>{{ charactor.name }}</td>
         </tr>
       </tbody>

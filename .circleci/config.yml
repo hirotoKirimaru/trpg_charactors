@@ -1,0 +1,26 @@
+version: 2.1
+executors:
+ default:
+   docker:
+     - image: circleci/node:8.11.3
+workflows:
+  deploy: #workflow名
+    jobs:
+      - humanCheck:
+          type: approval #人によるチェック
+      - deploy:
+          requires:
+            - humanCheck
+jobs:
+  deploy:
+    steps:
+      - checkout
+      - run: 
+          name: yarn
+          command: yarn 
+      - run:
+          name: build
+          command: npm run build
+      - run:
+          name: deploy to firebase
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN

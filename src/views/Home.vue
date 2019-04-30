@@ -45,10 +45,20 @@ export default class Home extends Vue {
       page: "https://character-sheets.appspot.com/lostroyal/"
     }
   ];
-  charactors: any = [
-    { id: 0, gameId: "0", name: "渡良瀬　準" },
-    { id: 1, gameId: "0", name: "阿紫花　英良" },
-    { id: 9, gameId: "4", name: "ランダ" }
+  charactors: Array<Object> = [
+    { id: 0, gameId: 0, game: "", name: "渡良瀬　準" },
+    { id: 1, gameId: 0, game: "", name: "阿紫花　英良" },
+    { id: 9, gameId: 4, game: "", name: "ランダ" }
   ];
+
+  mounted(): void {
+    this.setCharactorsToGameId();
+  }
+
+  public setCharactorsToGameId() {
+    this.charactors.forEach(element => {
+      element.game = this.games.find(game => game.id === element.gameId).name;
+    });
+  }
 }
 </script>
