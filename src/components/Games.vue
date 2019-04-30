@@ -45,13 +45,16 @@ class Game {
   }
 }
 
+// created
+Component.registerHooks(["created"]);
+
 @Component
 export default class Games extends Vue {
   // @Prop() private games!: any;
 
   games: Game = new Game(0, "", "");
 
-  mounted(): void {
+  created(): void {
     firebase
       .database()
       .ref("games/" + this.$store.getters.user.uid)
