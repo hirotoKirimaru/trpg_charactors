@@ -7,8 +7,9 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Games from "@/components/Games.vue";
-import Charactors from "@/components/Charactors.vue";
+// circleCI上は@で省略できない？
+import Games from "../components/Games.vue";
+import Charactors from "../components/Charactors.vue";
 
 class Charactor {
   id: number;
