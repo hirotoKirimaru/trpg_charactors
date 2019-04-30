@@ -1,5 +1,5 @@
-import firebase from "@firebase/app";
-import "@firebase/auth";
+import firebase from "firebase/app";
+// import "@firebase/auth";
 import store from "@/store";
 
 var config = {
@@ -12,11 +12,11 @@ var config = {
 };
 
 export default {
-  init() {
+  init(): void {
     firebase.initializeApp(config);
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
   },
-  login() {
+  login(): void{
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider);
   },
@@ -25,7 +25,8 @@ export default {
   },
   onAuth() {
     firebase.auth().onAuthStateChanged(user => {
-      user = user ? user : {};
+      // user = user ? user : {};
+      if (user === null) return;
       store.commit("onAuthStateChanged", user);
       store.commit("onUserStatusChanged", user.uid ? true : false);
     });
