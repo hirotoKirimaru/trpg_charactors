@@ -10,6 +10,8 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@firebase/app": "^0.3.16",
+    "@firebase/auth": "^0.10.1",
     "core-js": "^2.6.5",
     "eslint-loader": "^2.1.2",
     "register-service-worker": "^1.6.2",

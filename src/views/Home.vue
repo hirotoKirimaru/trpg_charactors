@@ -7,21 +7,28 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-// circleCI上は@で省略できない？
-import Games from "../components/Games.vue";
-import Charactors from "../components/Charactors.vue";
+import Games from "@/components/Games.vue";
+import Charactors from "@/components/Charactors.vue";
 
 class Charactor {
   id: number;
   gameId: number;
   game: String;
   name: String;
+  key: String;
 
-  constructor(id: number, gameId: number, game: String, name: String) {
+  constructor(
+    id: number,
+    gameId: number,
+    game: String,
+    name: String,
+    key: String
+  ) {
     this.id = id;
     this.gameId = gameId;
     this.game = game;
     this.name = name;
+    this.key = key;
   }
 }
 
@@ -73,9 +80,15 @@ export default class Home extends Vue {
   ];
 
   charactors: Array<Charactor> = [
-    { id: 0, gameId: 0, game: "", name: "渡良瀬　準" },
-    { id: 1, gameId: 0, game: "", name: "阿紫花　英良" },
-    { id: 9, gameId: 4, game: "", name: "ランダ" }
+    {
+      id: 0,
+      gameId: 0,
+      game: "",
+      name: "渡良瀬　準",
+      key: "ahVzfmNoYXJhY3Rlci1zaGVldHMtbXByFgsSDUNoYXJhY3RlckRhdGEYhuuGQgw"
+    },
+    { id: 1, gameId: 0, game: "", name: "阿紫花　英良", key: "" },
+    { id: 9, gameId: 4, game: "", name: "ランダ", key: "" }
   ];
 
   mounted(): void {
