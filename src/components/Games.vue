@@ -49,16 +49,13 @@ class Game {
 export default class Games extends Vue {
   // @Prop() private games!: any;
 
-  data() {
-    return {
-      games: null
-    };
-  }
+  games: Game = new Game(0, "", "");
 
   mounted(): void {
     firebase
       .database()
       .ref("games/" + this.$store.getters.user.uid)
+      .once("value")
       .then(result => {
         if (result.val()) {
           this.games = result.val();
