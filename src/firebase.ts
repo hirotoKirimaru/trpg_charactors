@@ -1,6 +1,6 @@
-// import firebase from "firebase";
-import firebase from "firebase/app";
-import "firebase/auth";
+import firebase from "firebase";
+// import firebase from "@firebase/app";
+// import "@firebase/auth";
 import store from "@/store.ts";
 
 var config = {
