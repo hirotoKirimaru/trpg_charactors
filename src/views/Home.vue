@@ -10,6 +10,32 @@ import { Component, Vue } from "vue-property-decorator";
 import Games from "@/components/Games.vue";
 import Charactors from "@/components/Charactors.vue";
 
+class Charactor {
+  id: number;
+  gameId: number;
+  game: String;
+  name: String;
+
+  constructor(id: number, gameId: number, game: String, name: String) {
+    this.id = id;
+    this.gameId = gameId;
+    this.game = game;
+    this.name = name;
+  }
+}
+
+class Game {
+  id: number;
+  name: String;
+  page: String;
+
+  constructor(id: number, name: String, page: String) {
+    this.id = id;
+    this.name = name;
+    this.page = page;
+  }
+}
+
 @Component({
   components: {
     Games,
@@ -17,8 +43,7 @@ import Charactors from "@/components/Charactors.vue";
   }
 })
 export default class Home extends Vue {
-  /** data */
-  games: any = [
+  games: Array<Game> = [
     {
       id: 0,
       name: "シノビガミ",
@@ -45,7 +70,8 @@ export default class Home extends Vue {
       page: "https://character-sheets.appspot.com/lostroyal/"
     }
   ];
-  charactors: Array<Object> = [
+
+  charactors: Array<Charactor> = [
     { id: 0, gameId: 0, game: "", name: "渡良瀬　準" },
     { id: 1, gameId: 0, game: "", name: "阿紫花　英良" },
     { id: 9, gameId: 4, game: "", name: "ランダ" }
@@ -57,7 +83,7 @@ export default class Home extends Vue {
 
   public setCharactorsToGameId() {
     this.charactors.forEach(element => {
-      element.game = this.games.find(game => game.id === element.gameId).name;
+      element.game = this.games.find(game => game.id == element.gameId)!.name;
     });
   }
 }
