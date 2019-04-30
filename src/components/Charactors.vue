@@ -1,20 +1,18 @@
 <template>
-  <div class="games">
+  <div class="charactors">
     <table>
       <thead>
         <tr>
           <th class="id">ID</th>
           <th class="name">ゲーム名</th>
-          <th class="page">キャラクター作成ページ</th>
+          <th class="page">キャラクター名</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="game in games" :key="game.id">
-          <td>{{ game.id }}</td>
-          <td>{{ game.name }}</td>
-          <td>
-            <a :href="game.page">{{ game.page }}</a>
-          </td>
+        <tr v-for="charactor in charactors" :key="charactor.id">
+          <td>{{ charactor.id }}</td>
+          <td>{{ charactor.gameId }}</td>
+          <td>{{ charactor.name }}</td>
         </tr>
       </tbody>
     </table>
@@ -25,8 +23,8 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
-export default class Games extends Vue {
-  @Prop() private games!: any;
+export default class Charactors extends Vue {
+  @Prop() private charactors!: any;
 
   mounted(): void {}
 }
