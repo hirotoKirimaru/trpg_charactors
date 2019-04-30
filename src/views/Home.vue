@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <Games :games="games" />
+    <!-- <Games :games="games" /> -->
+    <Games />
     <Charactors :charactors="charactors" />
   </div>
 </template>
@@ -32,18 +33,6 @@ class Charactor {
   }
 }
 
-class Game {
-  id: number;
-  name: String;
-  page: String;
-
-  constructor(id: number, name: String, page: String) {
-    this.id = id;
-    this.name = name;
-    this.page = page;
-  }
-}
-
 @Component({
   components: {
     Games,
@@ -51,7 +40,8 @@ class Game {
   }
 })
 export default class Home extends Vue {
-  games: Array<Game> = [
+  // games: Array<Game> = [
+  games: Array<Object> = [
     {
       id: 0,
       name: "シノビガミ",
@@ -97,7 +87,7 @@ export default class Home extends Vue {
 
   public setCharactorsToGameId() {
     this.charactors.forEach(element => {
-      element.game = this.games.find(game => game.id == element.gameId)!.name;
+      // element.game = this.games.find(game => game.id == element.gameId)!.name;
     });
   }
 }

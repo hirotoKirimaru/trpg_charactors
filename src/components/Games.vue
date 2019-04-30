@@ -33,11 +33,38 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 
+class Game {
+  id: number;
+  name: String;
+  page: String;
+
+  constructor(id: number, name: String, page: String) {
+    this.id = id;
+    this.name = name;
+    this.page = page;
+  }
+}
+
 @Component
 export default class Games extends Vue {
-  @Prop() private games!: any;
+  // @Prop() private games!: any;
 
-  mounted(): void {}
+  data() {
+    return {
+      games: null
+    };
+  }
+
+  mounted(): void {
+    firebase
+      .database()
+      .ref("games/" + this.$store.getters.user.uid)
+      .then(result => {
+        if (result.val()) {
+          this.games = result.val();
+        }
+      });
+  }
 
   deleteGame(): void {
     // this.games.splice(this.selectedIndex, 1);
