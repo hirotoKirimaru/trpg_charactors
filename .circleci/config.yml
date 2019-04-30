@@ -6,11 +6,11 @@ executors:
 workflows:
   deploy: #workflow名
     jobs:
-      - humanCheck:
-          type: approval #人によるチェック
+      #- humanCheck:
+      #    type: approval #人によるチェック
       - deploy:
-          requires:
-            - humanCheck
+      #    requires:
+      #      - humanCheck
 jobs:
   deploy:
     executor:
