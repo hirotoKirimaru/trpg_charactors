@@ -8,7 +8,8 @@ workflows:
     jobs:
       #- humanCheck:
       #    type: approval #人によるチェック
-      - deploy:
+      - deploy
+      # - deploy:
       #    requires:
       #      - humanCheck
 jobs:
