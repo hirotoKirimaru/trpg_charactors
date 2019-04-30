@@ -1,13 +1,11 @@
 <template>
   <div class="auth">
-    <!-- ログイン時にはフォームとログアウトボタンを表示 -->
     <div v-if="userStatus" key="login" class="navbar-item">
       <p class="navbar-item">{{ user.displayName }}</p>
       <button type="button" @click="doLogout">
         Sign out
       </button>
     </div>
-    <!-- 未ログイン時にはログインボタンを表示 -->
     <div v-else key="logout">
       <button type="button" class="google-button" @click="doLogin">
         <span class="google-button__icon"> </span>
@@ -26,20 +24,20 @@ Component.registerHooks(["created"]);
 
 @Component
 export default class Auth extends Vue {
-  created() {
+  created(): void {
     Firebase.onAuth();
   }
-  get user(): any {
+  get user(): firebase.User {
     return this.$store.getters.user;
   }
-  get userStatus(): any {
+  get userStatus(): boolean {
     return this.$store.getters.isSignedIn;
   }
-  doLogin() {
+  doLogin(): void {
     Firebase.login();
   }
 
-  doLogout() {
+  doLogout(): void {
     Firebase.logout();
   }
 }
