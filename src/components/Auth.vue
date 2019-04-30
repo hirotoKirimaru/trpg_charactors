@@ -21,9 +21,12 @@
 import { Component, Vue } from "vue-property-decorator";
 import Firebase from "@/firebase.ts";
 
+// created
+Component.registerHooks(["created"]);
+
 @Component
 export default class Auth extends Vue {
-  public created() {
+  created() {
     Firebase.onAuth();
   }
   get user(): any {
