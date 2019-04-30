@@ -23,7 +23,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import Firebase from "@/firebase";
+import Firebase from "@/firebase.ts";
 
 @Component
 export default class Auth extends Vue {
