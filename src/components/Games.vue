@@ -49,7 +49,7 @@ export default class Games extends Vue {
   saveGames(): void {
     firebase
       .database()
-      .ref("memos/" + this.$store.getters.user.uid)
+      .ref("games/" + this.$store.getters.user.uid)
       .set(this.games);
   }
 }

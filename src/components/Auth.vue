@@ -6,16 +6,18 @@
           <v-btn color="info" @click="doLogout">
             Sign out
           </v-btn>
-
+        </v-layout>
+        <v-layout>
           <p class="navbar-item">{{ user.displayName }}</p>
         </v-layout>
+      </v-flex>
+      <v-flex v-else key="logout">
         <v-layout justify-left md5>
           <v-btn color="info" @click="doLogin">
             Sign in with Google
           </v-btn>
         </v-layout>
       </v-flex>
-      <v-flex v-else key="logout"> </v-flex>
     </v-layout>
   </v-container>
 </template>
