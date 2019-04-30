@@ -1,25 +1,23 @@
 <template>
-  <v-container>
-    <v-layout text-xs-center wrap>
-      <v-flex v-if="userStatus" key="login">
-        <v-layout justify-left md5>
-          <v-btn color="info" @click="doLogout">
-            Sign out
-          </v-btn>
-        </v-layout>
-        <v-layout>
-          <p class="navbar-item">{{ user.displayName }}</p>
-        </v-layout>
-      </v-flex>
-      <v-flex v-else key="logout">
-        <v-layout justify-left md5>
-          <v-btn color="info" @click="doLogin">
-            Sign in with Google
-          </v-btn>
-        </v-layout>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <v-layout text-xs-center wrap>
+    <v-flex v-if="userStatus" key="login">
+      <v-layout justify-left md5>
+        <v-btn color="info" @click="doLogout">
+          Sign out
+        </v-btn>
+      </v-layout>
+      <v-layout justify-right>
+        <p class="navbar-item">{{ user.displayName }}</p>
+      </v-layout>
+    </v-flex>
+    <v-flex v-else key="logout">
+      <v-layout justify-left md5>
+        <v-btn color="info" @click="doLogin">
+          Sign in with Google
+        </v-btn>
+      </v-layout>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script lang="ts">
