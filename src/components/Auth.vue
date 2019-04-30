@@ -1,21 +1,21 @@
 <template>
   <v-container>
     <v-layout text-xs-center wrap>
-      <v-flex xs12 mb-5>
-        <v-layout justify-center>
-          <div v-if="userStatus" key="login">
-            <p class="navbar-item">{{ user.displayName }}</p>
-            <v-btn color="info" @click="doLogout">
-              Sign out
-            </v-btn>
-          </div>
-          <div v-else key="logout">
-            <v-btn color="info" @click="doLogin">
-              Sign in with Google
-            </v-btn>
-          </div>
+      <v-flex v-if="userStatus" key="login">
+        <v-layout justify-left md5>
+          <v-btn color="info" @click="doLogout">
+            Sign out
+          </v-btn>
+
+          <p class="navbar-item">{{ user.displayName }}</p>
+        </v-layout>
+        <v-layout justify-left md5>
+          <v-btn color="info" @click="doLogin">
+            Sign in with Google
+          </v-btn>
         </v-layout>
       </v-flex>
+      <v-flex v-else key="logout"> </v-flex>
     </v-layout>
   </v-container>
 </template>
