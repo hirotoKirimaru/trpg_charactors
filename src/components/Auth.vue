@@ -1,16 +1,16 @@
 <template>
   <v-layout text-xs-center wrap>
-    <v-flex v-if="userStatus" key="login">
-      <v-layout justify-left md5>
+    <v-flex v-if="userStatus" key="login" row>
+      <v-layout xs6>
         <v-btn color="info" @click="doLogout">
           Sign out
         </v-btn>
       </v-layout>
-      <v-layout justify-right>
+      <v-layout xs6>
         <p class="navbar-item">{{ user.displayName }}</p>
       </v-layout>
     </v-flex>
-    <v-flex v-else key="logout">
+    <v-flex v-else key="logout" row>
       <v-layout justify-left md5>
         <v-btn color="info" @click="doLogin">
           Sign in with Google
