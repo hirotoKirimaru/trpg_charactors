@@ -22,7 +22,7 @@ jobs:
           command: yarn 
       - run:
           name: build
-          command: npm run build
+          command: yarn build
       - run:
           name: deploy to firebase
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
