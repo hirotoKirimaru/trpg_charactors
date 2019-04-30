@@ -6,7 +6,7 @@ import "./registerServiceWorker";
 
 Vue.config.productionTip = false;
 
-import Firebase from "@/firebase";
+import Firebase from "@/firebase.ts";
 Firebase.init();
 
 new Vue({
