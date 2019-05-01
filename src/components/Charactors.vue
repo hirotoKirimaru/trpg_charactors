@@ -147,33 +147,35 @@ export default class Charactors extends Vue {
       this.editedIndex = -1;
     }, 300);
   }
-
+  /**
+   * 各データ列の更新を行うためのメソッド。
+   */
   save() {
     // 更新
     if (this.editedIndex > -1) {
       let editItemId = this.editedItem.id;
-      if (
-        !(this.charactors[this.editedIndex].id === editItemId) &&
-        this.charactors.some(element => {
-          return element.id === editItemId;
-        })
-      ) {
-        alert("id重複してるよ！");
-        return;
-      }
+      // if (
+      //   !(this.charactors[this.editedIndex].id === editItemId) &&
+      //   this.charactors.some(element => {
+      //     return element.id === editItemId;
+      //   })
+      // ) {
+      //   alert("id重複してるよ！");
+      //   return;
+      // }
 
       Object.assign(this.charactors[this.editedIndex], this.editedItem);
       // 新規登録
     } else {
-      if (
-        !(this.charactors === null) ||
-        this.charactors.some(element => {
-          return element.id === this.editedItem.id;
-        })
-      ) {
-        alert("id重複してるよ！");
-        return;
-      }
+      // if (
+      //   !(this.charactors === null) ||
+      //   this.charactors.some(element => {
+      //     return element.id === this.editedItem.id;
+      //   })
+      // ) {
+      //   alert("id重複してるよ！");
+      //   return;
+      // }
 
       this.charactors.push(this.editedItem);
     }
