@@ -1,8 +1,9 @@
 <template>
   <div class="home" v-if="userStatus">
     <!-- <Games :games="games" /> -->
+    <!-- <Charactors :charactors="charactors" /> -->
     <Games />
-    <Charactors :charactors="charactors" />
+    <Charactors />
   </div>
   <div v-else>
     ログインしてください
@@ -14,28 +15,6 @@ import { Component, Vue } from "vue-property-decorator";
 import Games from "@/components/Games.vue";
 import Charactors from "@/components/Charactors.vue";
 
-class Charactor {
-  id: number;
-  gameId: number;
-  game: String;
-  name: String;
-  key: String;
-
-  constructor(
-    id: number,
-    gameId: number,
-    game: String,
-    name: String,
-    key: String
-  ) {
-    this.id = id;
-    this.gameId = gameId;
-    this.game = game;
-    this.name = name;
-    this.key = key;
-  }
-}
-
 @Component({
   components: {
     Games,
@@ -44,55 +23,55 @@ class Charactor {
 })
 export default class Home extends Vue {
   // games: Array<Game> = [
-  games: Array<Object> = [
-    {
-      id: 0,
-      name: "シノビガミ",
-      page: "https://character-sheets.appspot.com/shinobigami/"
-    },
-    {
-      id: 1,
-      name: "ウタカゼ",
-      page: "https://charasheet.vampire-blood.net/utakaze_pc_making.html"
-    },
-    {
-      id: 2,
-      name: "クトゥルフ",
-      page: "https://charasheet.vampire-blood.net/coc_pc_making.html"
-    },
-    {
-      id: 3,
-      name: "パラノイア",
-      page: "https://charasheet.vampire-blood.net/paranoia_pc_making.html"
-    },
-    {
-      id: 4,
-      name: "ロストロイヤル",
-      page: "https://character-sheets.appspot.com/lostroyal/"
-    }
-  ];
+  // games: Array<Object> = [
+  //   {
+  //     id: 0,
+  //     name: "シノビガミ",
+  //     page: "https://character-sheets.appspot.com/shinobigami/"
+  //   },
+  //   {
+  //     id: 1,
+  //     name: "ウタカゼ",
+  //     page: "https://charasheet.vampire-blood.net/utakaze_pc_making.html"
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "クトゥルフ",
+  //     page: "https://charasheet.vampire-blood.net/coc_pc_making.html"
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "パラノイア",
+  //     page: "https://charasheet.vampire-blood.net/paranoia_pc_making.html"
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "ロストロイヤル",
+  //     page: "https://character-sheets.appspot.com/lostroyal/"
+  //   }
+  // ];
 
-  charactors: Array<Charactor> = [
-    {
-      id: 0,
-      gameId: 0,
-      game: "",
-      name: "渡良瀬　準",
-      key: "ahVzfmNoYXJhY3Rlci1zaGVldHMtbXByFgsSDUNoYXJhY3RlckRhdGEYhuuGQgw"
-    },
-    { id: 1, gameId: 0, game: "", name: "阿紫花　英良", key: "" },
-    { id: 9, gameId: 4, game: "", name: "ランダ", key: "" }
-  ];
+  // charactors: Array<Charactor> = [
+  //   {
+  //     id: 0,
+  //     gameId: 0,
+  //     game: "",
+  //     name: "渡良瀬準",
+  //     key: "ahVzfmNoYXJhY3Rlci1zaGVldHMtbXByFgsSDUNoYXJhY3RlckRhdGEYhuuGQgw"
+  //   },
+  //   { id: 1, gameId: 0, game: "", name: "阿紫花英良", key: "" },
+  //   { id: 9, gameId: 4, game: "", name: "ランダ", key: "" }
+  // ];
 
-  mounted(): void {
-    this.setCharactorsToGameId();
-  }
+  // mounted(): void {
+  //   this.setCharactorsToGameId();
+  // }
 
-  public setCharactorsToGameId() {
-    this.charactors.forEach(element => {
-      // element.game = this.games.find(game => game.id == element.gameId)!.name;
-    });
-  }
+  // public setCharactorsToGameId() {
+  //   this.charactors.forEach(element => {
+  //     // element.game = this.games.find(game => game.id == element.gameId)!.name;
+  //   });
+  // }
 
   get userStatus(): boolean {
     return this.$store.getters.isSignedIn;

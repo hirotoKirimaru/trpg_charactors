@@ -137,7 +137,7 @@ export default class Games extends Vue {
   save() {
     // 更新
     if (this.editedIndex > -1) {
-      let editItemId = this.editItem.id;
+      let editItemId = this.editedItem.id;
       if (
         !(this.games[this.editedIndex].id === editItemId) &&
         this.games.some(element => {
