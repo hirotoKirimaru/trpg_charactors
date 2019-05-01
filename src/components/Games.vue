@@ -6,6 +6,7 @@
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on }">
+          <v-btn color="primary" @click="saveGames">Save</v-btn>
           <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
         </template>
         <v-card>
@@ -20,6 +21,7 @@
                   <v-text-field
                     v-model="editedItem.id"
                     label="id"
+                    type="number"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
@@ -60,9 +62,7 @@
           </v-icon>
         </td>
       </template>
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
-      </template>
+      <template v-slot:no-data> </template>
     </v-data-table>
   </div>
 </template>
@@ -86,7 +86,7 @@ class Game {
 }
 
 // created
-Component.registerHooks(["created2"]);
+Component.registerHooks(["created"]);
 
 @Component
 export default class Games extends Vue {
@@ -94,7 +94,8 @@ export default class Games extends Vue {
   headers: any = [
     { text: "id", value: "id", sortable: false },
     { text: "キャラ名", value: "name" },
-    { text: "キャラメイクページ", value: "nage" }
+    { text: "キャラメイクページ", value: "nage" },
+    { text: "Actions", value: "name", sortable: false }
   ];
   games: Array<Game> = [];
   editedIndex: number = -1;
@@ -125,10 +126,6 @@ export default class Games extends Vue {
       this.games.splice(index, 1);
   }
 
-  initialize() {
-    this.created2();
-  }
-
   close() {
     this.dialog = false;
     setTimeout(() => {
@@ -146,7 +143,7 @@ export default class Games extends Vue {
     this.close();
   }
 
-  created2(): void {
+  created(): void {
     firebase
       .database()
       // .ref("games/")
