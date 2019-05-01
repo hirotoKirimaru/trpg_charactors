@@ -94,8 +94,8 @@ export default class Games extends Vue {
   headers: any = [
     { text: "id", value: "id", sortable: false },
     { text: "キャラ名", value: "name" },
-    { text: "キャラメイクページ", value: "nage" },
-    { text: "Actions", value: "name", sortable: false }
+    { text: "キャラメイクページ", value: "page" },
+    { text: "Actions", value: "action", sortable: false }
   ];
   games: Array<Game> = [];
   editedIndex: number = -1;
@@ -135,9 +135,31 @@ export default class Games extends Vue {
   }
 
   save() {
+    // 更新
     if (this.editedIndex > -1) {
+      let editItemId = this.editItem.id;
+      if (
+        !(this.games[this.editedIndex].id === editItemId) &&
+        this.games.some(element => {
+          return element.id === editItemId;
+        })
+      ) {
+        alert("id重複してるよ！");
+        return;
+      }
+
       Object.assign(this.games[this.editedIndex], this.editedItem);
+      // 新規登録
     } else {
+      if (
+        this.games.some(element => {
+          return element.id === this.editedItem.id;
+        })
+      ) {
+        alert("id重複してるよ！");
+        return;
+      }
+
       this.games.push(this.editedItem);
     }
     this.close();
@@ -146,7 +168,6 @@ export default class Games extends Vue {
   created(): void {
     firebase
       .database()
-      // .ref("games/")
       .ref("games/" + this.$store.getters.user.uid)
       .on("value", result => {
         if (result === null) {
@@ -160,7 +181,13 @@ export default class Games extends Vue {
     firebase
       .database()
       .ref("games/" + this.$store.getters.user.uid)
-      .set(this.games);
+      .set(this.games, error => {
+        if (error) {
+          alert("更新に失敗しました");
+        } else {
+          alert("更新に成功しました");
+        }
+      });
   }
 }
 </script>
