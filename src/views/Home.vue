@@ -1,8 +1,11 @@
 <template>
-  <div class="home">
+  <div class="home" v-if="userStatus">
     <!-- <Games :games="games" /> -->
     <Games />
     <Charactors :charactors="charactors" />
+  </div>
+  <div v-else>
+    ログインしてください
   </div>
 </template>
 
@@ -89,6 +92,10 @@ export default class Home extends Vue {
     this.charactors.forEach(element => {
       // element.game = this.games.find(game => game.id == element.gameId)!.name;
     });
+  }
+
+  get userStatus(): boolean {
+    return this.$store.getters.isSignedIn;
   }
 }
 </script>

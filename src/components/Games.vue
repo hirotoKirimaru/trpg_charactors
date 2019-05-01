@@ -1,34 +1,74 @@
 <template>
-  <div class="games">
-    <table>
-      <thead>
-        <tr>
-          <th class="id">ID</th>
-          <th class="name">ゲーム名</th>
-          <th class="page">キャラクター作成ページ</th>
-          <th class="del">削除</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="game in games" :key="game.id">
-          <td>{{ game.id }}</td>
-          <td>{{ game.name }}</td>
-          <td>
-            <a :href="game.page">{{ game.page }}</a>
-          </td>
-          <td>
-            <v-btn color="warning" @click="deleteGame">削除</v-btn>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <v-btn class="" @click="delGame">追加</v-btn>
-    <v-btn class="" @click="saveGames">保存</v-btn>
+  <div>
+    <v-toolbar flat color="white">
+      <v-toolbar-title>ゲーム</v-toolbar-title>
+      <v-divider class="mx-2" inset vertical></v-divider>
+      <v-spacer></v-spacer>
+      <v-dialog v-model="dialog" max-width="500px">
+        <template v-slot:activator="{ on }">
+          <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="headline">{{ formTitle }}</span>
+          </v-card-title>
+
+          <v-card-text>
+            <v-container grid-list-md>
+              <v-layout wrap>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field
+                    v-model="editedItem.id"
+                    label="id"
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field
+                    v-model="editedItem.name"
+                    label="name"
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field
+                    v-model="editedItem.page"
+                    label="page"
+                  ></v-text-field>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
+            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-toolbar>
+    <v-data-table :headers="headers" :items="games" class="elevation-1">
+      <template v-slot:items="props">
+        <td>{{ props.item.id }}</td>
+        <td class="text-xs-right">{{ props.item.name }}</td>
+        <td class="text-xs-right">{{ props.item.page }}</td>
+        <td class="justify-center layout px-0">
+          <v-icon small class="mr-2" @click="editItem(props.item)">
+            edit
+          </v-icon>
+          <v-icon small @click="deleteItem(props.item)">
+            delete
+          </v-icon>
+        </td>
+      </template>
+      <template v-slot:no-data>
+        <v-btn color="primary" @click="initialize">Reset</v-btn>
+      </template>
+    </v-data-table>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Watch, Vue } from "vue-property-decorator";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
@@ -46,31 +86,77 @@ class Game {
 }
 
 // created
-Component.registerHooks(["created"]);
+Component.registerHooks(["created2"]);
 
 @Component
 export default class Games extends Vue {
-  // @Prop() private games!: any;
+  dialog: boolean = false;
+  headers: any = [
+    { text: "id", value: "id", sortable: false },
+    { text: "キャラ名", value: "name" },
+    { text: "キャラメイクページ", value: "nage" }
+  ];
+  games: Array<Game> = [];
+  editedIndex: number = -1;
+  editedItem: Game = {
+    id: 0,
+    name: "",
+    page: ""
+  };
+  defaultItem: Game = {
+    id: 0,
+    name: "",
+    page: ""
+  };
 
-  games: Game = new Game(0, "", "");
-
-  created(): void {
-    firebase
-      .database()
-      .ref("games/" + this.$store.getters.user.uid)
-      .once("value")
-      .then(result => {
-        if (result.val()) {
-          this.games = result.val();
-        }
-      });
+  get formTitle(): string {
+    return this.editedIndex === -1 ? "New Item" : "Edit Item";
   }
 
-  deleteGame(): void {
-    // this.games.splice(this.selectedIndex, 1);
-    // if (this.selectedIndex > 0){
-    //   this.selectedIndex--;
-    // }
+  editItem(item: Game) {
+    this.editedIndex = this.games.indexOf(item);
+    this.editedItem = Object.assign({}, item);
+    this.dialog = true;
+  }
+
+  deleteItem(item: Game) {
+    const index = this.games.indexOf(item);
+    confirm("Are you sure you want to delete this item?") &&
+      this.games.splice(index, 1);
+  }
+
+  initialize() {
+    this.created2();
+  }
+
+  close() {
+    this.dialog = false;
+    setTimeout(() => {
+      this.editedItem = Object.assign({}, this.defaultItem);
+      this.editedIndex = -1;
+    }, 300);
+  }
+
+  save() {
+    if (this.editedIndex > -1) {
+      Object.assign(this.games[this.editedIndex], this.editedItem);
+    } else {
+      this.games.push(this.editedItem);
+    }
+    this.close();
+  }
+
+  created2(): void {
+    firebase
+      .database()
+      // .ref("games/")
+      .ref("games/" + this.$store.getters.user.uid)
+      .on("value", result => {
+        if (result === null) {
+          return;
+        }
+        this.games = result.val();
+      });
   }
 
   saveGames(): void {
