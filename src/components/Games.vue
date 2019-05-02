@@ -83,6 +83,32 @@ class Game {
     this.name = name;
     this.page = page;
   }
+
+  /**
+   * Array<Game> と パラメータの Game が既に存在するかを確認する。
+   * 確認方法はidが一致するかどうかでチェックする。
+   * パラメータの this は Array.prototype.findIndex の第二引数にて渡す。
+   */
+  static equals(element: Game): boolean {
+    let unknown = this as unknown;
+    let item = unknown as Game;
+    return element.id === item.id;
+  }
+
+  /**
+   * Array<Game> と パラメータの Game が既に存在するかを確認する。
+   * 確認方法はすべてのパラメータが一致するかどうかで確認する。
+   * パラメータの this は Array.prototype.findIndex の第二引数にて渡す。
+   */
+  static strictEquals(element: Game): boolean {
+    let unknown = this as unknown;
+    let item = unknown as Game;
+    return (
+      element.id === item.id &&
+      element.name === item.name &&
+      element.page === item.page
+    );
+  }
 }
 
 // created
@@ -117,15 +143,12 @@ export default class Games extends Vue {
     return this.editedIndex === -1 ? "New Item" : "Edit Item";
   }
 
+  /**
+   * 選択したデータに紐づく情報をdataに格納する。
+   * また、ダイアログ用に値を変更する。
+   */
   editItem(item: Game) {
-    function findIndexFunction(element: Game): boolean {
-      return (
-        element.id === item.id &&
-        element.name === item.name &&
-        element.page === item.page
-      );
-    }
-    this.editedIndex = this.games.findIndex(findIndexFunction);
+    this.editedIndex = this.games.findIndex(Game.equals, item);
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }

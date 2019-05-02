@@ -100,7 +100,7 @@ describe("Function のテスト", () => {
       expect(tmpVm.$data.dialog).toBe(true);
     });
 
-    it("パラメータと部分一致するgameがある場合、editedIndexに-1を設定すること。", () => {
+    it("パラメータとidが部分一致するgameがある場合、editedIndexを設定すること。", () => {
       let tmpVm = init();
       let games = [
         {
@@ -124,7 +124,7 @@ describe("Function のテスト", () => {
 
       tmpVm.editItem(param);
 
-      expect(tmpVm.$data.editedIndex).toBe(-1);
+      expect(tmpVm.$data.editedIndex).toBe(1);
       expect(tmpVm.$data.editedItem).toStrictEqual(param);
       expect(tmpVm.$data.dialog).toBe(true);
     });
