@@ -110,6 +110,9 @@ export default class Games extends Vue {
     page: ""
   };
 
+  /**
+   * ダイアログのタイトルを取得する。
+   */
   get formTitle(): string {
     return this.editedIndex === -1 ? "New Item" : "Edit Item";
   }

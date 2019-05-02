@@ -133,13 +133,18 @@ export default class Charactors extends Vue {
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }
-
+  /**
+   *
+   */
   deleteItem(item: Charactor) {
     const index = this.charactors.indexOf(item);
     confirm("Are you sure you want to delete this item?") &&
       this.charactors.splice(index, 1);
   }
 
+  /**
+   * ダイアログを閉じる。
+   */
   close() {
     this.dialog = false;
     setTimeout(() => {
@@ -148,7 +153,7 @@ export default class Charactors extends Vue {
     }, 300);
   }
   /**
-   * 各データ列の更新を行うためのメソッド。
+   * 各データ列の更新を行う。
    */
   save() {
     // 更新
