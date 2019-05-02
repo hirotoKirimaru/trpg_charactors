@@ -118,7 +118,14 @@ export default class Games extends Vue {
   }
 
   editItem(item: Game) {
-    this.editedIndex = this.games.indexOf(item);
+    function findIndexFunction(element: Game): boolean {
+      return (
+        element.id === item.id &&
+        element.name === item.name &&
+        element.page === item.page
+      );
+    }
+    this.editedIndex = this.games.findIndex(findIndexFunction);
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }
