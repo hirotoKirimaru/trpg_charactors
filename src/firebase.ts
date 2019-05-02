@@ -14,9 +14,13 @@ var config = {
 export default {
   init(): void {
     firebase.initializeApp(config);
-    firebase.auth().setPersistence(process.env.NODE_ENV === 'test' 
-  ? firebase.auth.Auth.Persistence.NONE 
-  : firebase.auth.Auth.Persistence.SESSION);
+    firebase
+      .auth()
+      .setPersistence(
+        process.env.NODE_ENV === "test"
+          ? firebase.auth.Auth.Persistence.NONE
+          : firebase.auth.Auth.Persistence.SESSION
+      );
   },
   login(): void {
     const provider = new firebase.auth.GoogleAuthProvider();
