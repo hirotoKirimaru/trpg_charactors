@@ -7,7 +7,7 @@ import Games from "@/components/Games.vue";
 
 describe("Function の確認", () => {
   describe("formTitle の確認", () => {
-    beforeEach(() => {
+    beforeAll(() => {
       Firebase.init();
     });
 
@@ -27,18 +27,21 @@ describe("Function の確認", () => {
           editedIndex: editedIndex
         }
       });
+      // VMに値がセットされないため、functionをテストする場合は明示的にセット。
+      wrapper.vm.$data.editedIndex = editedIndex;
+
       // functionを呼び出す場合は、一旦キャストする。
       return wrapper.vm as any;
     };
 
     it("新規登録(editedindex -1)の場合、New Itemを取得する。", () => {
       let tmpVm = init(-1);
-      expect(tmpVm.formTitle).toMatch("New Item");
+      expect(tmpVm.formTitle).toBe("New Item");
     });
 
     it("更新(editedindex 0以上)の場合、Edit Itemを取得する。", () => {
       let tmpVm = init(0);
-      expect(tmpVm.formTitle).toMatch("Edit Item");
+      expect(tmpVm.formTitle).toBe("Edit Item");
     });
   });
 });
