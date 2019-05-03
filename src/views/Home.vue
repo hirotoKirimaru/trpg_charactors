@@ -5,7 +5,7 @@
       <Charactors :games="games" />
     </div>
     <div v-else>
-      自分用のユーザを確認した場合、ログインしてください
+      作成したキャラクターを確認したい場合、ログインしてください
     </div>
   </div>
 </template>
