@@ -81,16 +81,7 @@ export default class Games extends Vue {
   ];
   games: Array<Game> = [];
   editedIndex: number = -1;
-  editedItem: Game = {
-    id: 0,
-    name: "",
-    page: ""
-  };
-  defaultItem: Game = {
-    id: 0,
-    name: "",
-    page: ""
-  };
+  editedItem: Game = Game.default();
 
   /**
    * ダイアログのタイトルを取得する。
@@ -124,7 +115,7 @@ export default class Games extends Vue {
   close(): void {
     this.dialog = false;
     setTimeout(() => {
-      this.editedItem = Object.assign({}, this.defaultItem);
+      this.editedItem = Object.assign({}, Game.default());
       this.editedIndex = -1;
     }, 300);
   }

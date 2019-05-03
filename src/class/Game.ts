@@ -10,6 +10,13 @@ export default class Game {
   }
 
   /**
+   * デフォルトを返却する。
+   */
+  static default(): Game {
+    return new Game(0, "", "");
+  }
+
+  /**
    * Array<Game> と パラメータの Game が既に存在するかを確認する。
    * 確認方法はidが一致するかどうかでチェックする。
    * パラメータの this は Array.prototype.findIndex の第二引数にて渡す。
