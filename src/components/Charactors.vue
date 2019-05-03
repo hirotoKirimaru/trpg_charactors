@@ -90,27 +90,34 @@ export default class Charactors extends Vue {
   editedIndex: number = -1;
   editedItem: Charactor = Charactor.default();
 
+  /**
+   * ダイアログのタイトルを取得する。
+   */
   get formTitle(): string {
     return this.editedIndex === -1 ? "New Item" : "Edit Item";
   }
 
+  /**
+   * 選択したデータに紐づく情報をdataに格納する。
+   * また、ダイアログ用に値を変更する。
+   */
   editItem(item: Charactor) {
     this.editedIndex = this.charactors.indexOf(item);
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }
   /**
-   *
+   * 選択したデータに紐づく情報をdataから削除する。
    */
   deleteItem(item: Charactor) {
     const index = this.charactors.indexOf(item);
     confirm("Are you sure you want to delete this item?") &&
       this.charactors.splice(index, 1);
   }
-
   /**
-   * ダイアログを閉じる。
+   * ダイアログ終了すると同時に、選択中データを格納する変数を初期化する。
    */
+
   close() {
     this.dialog = false;
     setTimeout(() => {
@@ -137,6 +144,9 @@ export default class Charactors extends Vue {
     this.close();
   }
 
+  /**
+   * Firebaseから必要な初期表示情報を取得する。
+   */
   created(): void {
     firebase
       .database()
@@ -146,6 +156,9 @@ export default class Charactors extends Vue {
       });
   }
 
+  /**
+   * Firebaseにgamesを更新する。
+   */
   saveCharactors(): void {
     firebase
       .database()
