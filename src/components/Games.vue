@@ -142,7 +142,7 @@ export default class Games extends Vue {
   created(): void {
     firebase
       .database()
-      .ref("games/" + this.$store.getters.user.uid)
+      .ref("games")
       .on("value", result => {
         this.games = result!.val();
       });
