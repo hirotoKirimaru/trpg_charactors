@@ -19,13 +19,6 @@
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
                   <v-text-field
-                    v-model="editedItem.id"
-                    label="id"
-                    type="number"
-                  ></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field
                     v-model="editedItem.gameId"
                     label="gameId"
                   ></v-text-field>
@@ -56,7 +49,6 @@
     </v-toolbar>
     <v-data-table :headers="headers" :items="charactors" class="elevation-1">
       <template v-slot:items="props">
-        <td>{{ props.item.id }}</td>
         <td>{{ props.item.gameId }}</td>
         <td>{{ props.item.name }}</td>
         <td class="justify-center layout px-0">
@@ -100,7 +92,6 @@ Component.registerHooks(["created"]);
 export default class Charactors extends Vue {
   dialog: boolean = false;
   headers: any = [
-    { text: "id", value: "id" },
     { text: "ゲーム名", value: "game" },
     { text: "キャラ名", value: "name" },
     { text: "Actions", value: "action", sortable: false, align: "center" }
@@ -148,35 +139,19 @@ export default class Charactors extends Vue {
       this.editedIndex = -1;
     }, 300);
   }
+
   /**
-   * 各データ列の更新を行う。
+   * ダイアログで更新したデータを変数に格納する。
+   * 新規登録時はidにgamesのmaxId + 1の値を設定する。
    */
   save() {
-    // 更新
     if (this.editedIndex > -1) {
-      let editItemId = this.editedItem.id;
-      // if (
-      //   !(this.charactors[this.editedIndex].id === editItemId) &&
-      //   this.charactors.some(element => {
-      //     return element.id === editItemId;
-      //   })
-      // ) {
-      //   alert("id重複してるよ！");
-      //   return;
-      // }
-
       Object.assign(this.charactors[this.editedIndex], this.editedItem);
-      // 新規登録
     } else {
-      // if (
-      //   !(this.charactors === null) ||
-      //   this.charactors.some(element => {
-      //     return element.id === this.editedItem.id;
-      //   })
-      // ) {
-      //   alert("id重複してるよ！");
-      //   return;
-      // }
+      let maxId: number = this.charactors.reduce((a, b) =>
+        a.id > b.id ? a : b
+      ).id;
+      this.editedItem.id = ++maxId;
 
       this.charactors.push(this.editedItem);
     }
