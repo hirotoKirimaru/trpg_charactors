@@ -51,8 +51,8 @@
     <v-data-table :headers="headers" :items="games" class="elevation-1">
       <template v-slot:items="props">
         <td>{{ props.item.id }}</td>
-        <td class="text-xs-right">{{ props.item.name }}</td>
-        <td class="text-xs-right">
+        <td>{{ props.item.name }}</td>
+        <td>
           <a :href="props.item.page">{{ props.item.page }}</a>
         </td>
         <td class="justify-center layout px-0">
@@ -123,7 +123,7 @@ export default class Games extends Vue {
     { text: "id", value: "id" },
     { text: "キャラ名", value: "name" },
     { text: "キャラメイクページ", value: "page" },
-    { text: "Actions", value: "action", sortable: false }
+    { text: "Actions", value: "action", sortable: false, align: "center" }
   ];
   games: Array<Game> = [];
   editedIndex: number = -1;

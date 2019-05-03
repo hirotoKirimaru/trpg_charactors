@@ -57,8 +57,8 @@
     <v-data-table :headers="headers" :items="charactors" class="elevation-1">
       <template v-slot:items="props">
         <td>{{ props.item.id }}</td>
-        <td class="text-xs-right">{{ props.item.gameId }}</td>
-        <td class="text-xs-right">{{ props.item.name }}</td>
+        <td>{{ props.item.gameId }}</td>
+        <td>{{ props.item.name }}</td>
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item)">
             edit
@@ -103,7 +103,7 @@ export default class Charactors extends Vue {
     { text: "id", value: "id" },
     { text: "ゲーム名", value: "game" },
     { text: "キャラ名", value: "name" },
-    { text: "Actions", value: "action", sortable: false }
+    { text: "Actions", value: "action", sortable: false, align: "center" }
   ];
   charactors: Array<Charactor> = [];
   editedIndex: number = -1;
