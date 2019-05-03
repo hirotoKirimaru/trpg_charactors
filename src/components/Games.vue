@@ -19,13 +19,6 @@
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
                   <v-text-field
-                    v-model="editedItem.id"
-                    label="id"
-                    type="number"
-                  ></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field
                     v-model="editedItem.name"
                     label="name"
                   ></v-text-field>
@@ -50,7 +43,6 @@
     </v-toolbar>
     <v-data-table :headers="headers" :items="games" class="elevation-1">
       <template v-slot:items="props">
-        <td>{{ props.item.id }}</td>
         <td>{{ props.item.name }}</td>
         <td>
           <a :href="props.item.page">{{ props.item.page }}</a>
@@ -83,8 +75,7 @@ Component.registerHooks(["created"]);
 export default class Games extends Vue {
   dialog: boolean = false;
   headers: any = [
-    { text: "id", value: "id" },
-    { text: "キャラ名", value: "name" },
+    { text: "ゲーム名", value: "name" },
     { text: "キャラメイクページ", value: "page" },
     { text: "Actions", value: "action", sortable: false, align: "center" }
   ];
@@ -140,32 +131,14 @@ export default class Games extends Vue {
 
   /**
    * ダイアログで更新したデータを変数に格納する。
+   * 新規登録時はidにgamesのmaxId + 1の値を設定する。
    */
   save(): void {
-    // 更新
     if (this.editedIndex > -1) {
-      let editItemId = this.editedItem.id;
-      if (
-        !(this.games[this.editedIndex].id === editItemId) &&
-        this.games.some(element => {
-          return element.id === editItemId;
-        })
-      ) {
-        alert("id重複してるよ！");
-        return;
-      }
-
       Object.assign(this.games[this.editedIndex], this.editedItem);
-      // 新規登録
     } else {
-      if (
-        this.games.some(element => {
-          return element.id === this.editedItem.id;
-        })
-      ) {
-        alert("id重複してるよ！");
-        return;
-      }
+      let maxId: number = this.games.reduce((a, b) => (a.id > b.id ? a : b)).id;
+      this.editedItem.id = ++maxId;
 
       this.games.push(this.editedItem);
     }
