@@ -70,20 +70,7 @@ import { Component, Prop, Watch, Vue } from "vue-property-decorator";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
-
-class Charactor {
-  id: number;
-  gameId: number;
-  name: String;
-  key: String;
-
-  constructor(id: number, gameId: number, name: String, key: String) {
-    this.id = id;
-    this.gameId = gameId;
-    this.name = name;
-    this.key = key;
-  }
-}
+import Charactor from "@/class/Charactor";
 
 // created
 Component.registerHooks(["created"]);
@@ -98,18 +85,7 @@ export default class Charactors extends Vue {
   ];
   charactors: Array<Charactor> = [];
   editedIndex: number = -1;
-  editedItem: Charactor = {
-    id: 0,
-    gameId: 0,
-    name: "",
-    key: ""
-  };
-  defaultItem: Charactor = {
-    id: 0,
-    gameId: 0,
-    name: "",
-    key: ""
-  };
+  editedItem: Charactor = Charactor.default();
 
   get formTitle(): string {
     return this.editedIndex === -1 ? "New Item" : "Edit Item";
@@ -135,7 +111,7 @@ export default class Charactors extends Vue {
   close() {
     this.dialog = false;
     setTimeout(() => {
-      this.editedItem = Object.assign({}, this.defaultItem);
+      this.editedItem = Object.assign({}, Charactor.default());
       this.editedIndex = -1;
     }, 300);
   }
