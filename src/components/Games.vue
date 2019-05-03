@@ -68,18 +68,17 @@ import "firebase/auth";
 import "firebase/database";
 import Game from "@/class/Game";
 
-// created
-Component.registerHooks(["created"]);
-
 @Component
 export default class Games extends Vue {
+  @Prop() games!: Array<Game>;
+
   dialog: boolean = false;
   headers: any = [
     { text: "ゲーム名", value: "name" },
     { text: "キャラメイクページ", value: "page" },
     { text: "Actions", value: "action", sortable: false, align: "center" }
   ];
-  games: Array<Game> = [];
+  // games: Array<Game> = [];
   editedIndex: number = -1;
   editedItem: Game = Game.default();
 
@@ -134,18 +133,6 @@ export default class Games extends Vue {
       this.games.push(this.editedItem);
     }
     this.close();
-  }
-
-  /**
-   * Firebaseから必要な初期表示情報を取得する。
-   */
-  created(): void {
-    firebase
-      .database()
-      .ref("games")
-      .on("value", result => {
-        this.games = result!.val();
-      });
   }
 
   /**

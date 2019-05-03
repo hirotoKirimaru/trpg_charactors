@@ -71,12 +71,15 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 import Charactor from "@/class/Charactor";
+import Game from "@/class/Game";
 
 // created
 Component.registerHooks(["created"]);
 
 @Component
 export default class Charactors extends Vue {
+  @Prop() games!: Array<Game>;
+
   dialog: boolean = false;
   headers: any = [
     { text: "ゲーム名", value: "game" },
