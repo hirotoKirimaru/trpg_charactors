@@ -52,7 +52,9 @@
       <template v-slot:items="props">
         <td>{{ props.item.id }}</td>
         <td class="text-xs-right">{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.page }}</td>
+        <td class="text-xs-right">
+          <a :href="props.item.page">{{ props.item.page }}</a>
+        </td>
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item)">
             edit
@@ -118,7 +120,7 @@ Component.registerHooks(["created"]);
 export default class Games extends Vue {
   dialog: boolean = false;
   headers: any = [
-    { text: "id", value: "id", sortable: false },
+    { text: "id", value: "id" },
     { text: "キャラ名", value: "name" },
     { text: "キャラメイクページ", value: "page" },
     { text: "Actions", value: "action", sortable: false }
@@ -203,10 +205,7 @@ export default class Games extends Vue {
       .database()
       .ref("games/" + this.$store.getters.user.uid)
       .on("value", result => {
-        if (result === null) {
-          return;
-        }
-        this.games = result.val();
+        this.games = result!.val();
       });
   }
 

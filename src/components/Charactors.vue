@@ -26,14 +26,20 @@
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field
-                    v-model="editedItem.game"
-                    label="game"
+                    v-model="editedItem.gameId"
+                    label="gameId"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field
                     v-model="editedItem.name"
                     label="name"
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6 md4>
+                  <v-text-field
+                    v-model="editedItem.key"
+                    label="key"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -51,7 +57,7 @@
     <v-data-table :headers="headers" :items="charactors" class="elevation-1">
       <template v-slot:items="props">
         <td>{{ props.item.id }}</td>
-        <td class="text-xs-right">{{ props.item.game }}</td>
+        <td class="text-xs-right">{{ props.item.gameId }}</td>
         <td class="text-xs-right">{{ props.item.name }}</td>
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item)">
@@ -76,20 +82,12 @@ import "firebase/database";
 class Charactor {
   id: number;
   gameId: number;
-  game: String;
   name: String;
   key: String;
 
-  constructor(
-    id: number,
-    gameId: number,
-    game: String,
-    name: String,
-    key: String
-  ) {
+  constructor(id: number, gameId: number, name: String, key: String) {
     this.id = id;
     this.gameId = gameId;
-    this.game = game;
     this.name = name;
     this.key = key;
   }
@@ -102,7 +100,7 @@ Component.registerHooks(["created"]);
 export default class Charactors extends Vue {
   dialog: boolean = false;
   headers: any = [
-    { text: "id", value: "id", sortable: false },
+    { text: "id", value: "id" },
     { text: "ゲーム名", value: "game" },
     { text: "キャラ名", value: "name" },
     { text: "Actions", value: "action", sortable: false }
@@ -112,14 +110,12 @@ export default class Charactors extends Vue {
   editedItem: Charactor = {
     id: 0,
     gameId: 0,
-    game: "",
     name: "",
     key: ""
   };
   defaultItem: Charactor = {
     id: 0,
     gameId: 0,
-    game: "",
     name: "",
     key: ""
   };
@@ -192,10 +188,7 @@ export default class Charactors extends Vue {
       .database()
       .ref("charactors/" + this.$store.getters.user.uid)
       .on("value", result => {
-        if (result === null) {
-          return;
-        }
-        this.charactors = result.val();
+        this.charactors = result!.val();
       });
   }
 
