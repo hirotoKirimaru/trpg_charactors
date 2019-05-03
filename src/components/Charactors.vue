@@ -18,10 +18,13 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 sm6 md4>
-                  <v-text-field
+                  <v-select
                     v-model="editedItem.gameId"
-                    label="gameId"
-                  ></v-text-field>
+                    :items="games"
+                    item-text="name"
+                    item-value="id"
+                    label="Game"
+                  ></v-select>
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field
@@ -49,7 +52,7 @@
     </v-toolbar>
     <v-data-table :headers="headers" :items="charactors" class="elevation-1">
       <template v-slot:items="props">
-        <td>{{ props.item.gameId }}</td>
+        <td>{{ getNameById(props.item.gameId) }}</td>
         <td>{{ props.item.name }}</td>
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item)">
@@ -89,6 +92,11 @@ export default class Charactors extends Vue {
   charactors: Array<Charactor> = [];
   editedIndex: number = -1;
   editedItem: Charactor = Charactor.default();
+
+  getNameById(id: number) {
+    let targetGame = this.games.find(game => game.id === id);
+    return targetGame!.name;
+  }
 
   /**
    * ダイアログのタイトルを取得する。

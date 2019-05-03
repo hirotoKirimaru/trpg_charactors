@@ -25,8 +25,8 @@ export default class Charactor {
    */
   static equals(element: Charactor): boolean {
     let unknown = this as unknown;
-    let item = unknown as Charactor;
-    return element.id === item.id;
+    let id = unknown as number;
+    return element.id === id;
   }
 
   /**

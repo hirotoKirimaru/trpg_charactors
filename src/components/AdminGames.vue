@@ -95,7 +95,7 @@ export default class Games extends Vue {
    * また、ダイアログ用に値を変更する。
    */
   editItem(item: Game): void {
-    this.editedIndex = this.games.findIndex(Game.equals, item);
+    this.editedIndex = this.games.findIndex(Game.equals, item.id);
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }
@@ -104,7 +104,7 @@ export default class Games extends Vue {
    * 選択したデータに紐づく情報をdataから削除する。
    */
   deleteItem(item: Game): void {
-    let index = this.games.findIndex(Game.equals, item);
+    let index = this.games.findIndex(Game.equals, item.id);
     confirm("Are you sure you want to delete this item?") &&
       this.games.splice(index, 1);
   }

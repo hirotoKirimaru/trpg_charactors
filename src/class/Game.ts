@@ -23,8 +23,8 @@ export default class Game {
    */
   static equals(element: Game): boolean {
     let unknown = this as unknown;
-    let item = unknown as Game;
-    return element.id === item.id;
+    let id = unknown as number;
+    return element.id === id;
   }
 
   /**
