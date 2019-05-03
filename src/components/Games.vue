@@ -30,7 +30,7 @@
                     label="name"
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 sm6 md4>
+                <v-flex xs12 sm12 md12>
                   <v-text-field
                     v-model="editedItem.page"
                     label="page"
@@ -149,19 +149,25 @@ export default class Games extends Vue {
    * 選択したデータに紐づく情報をdataに格納する。
    * また、ダイアログ用に値を変更する。
    */
-  editItem(item: Game) {
+  editItem(item: Game): void {
     this.editedIndex = this.games.findIndex(Game.equals, item);
     this.editedItem = Object.assign({}, item);
     this.dialog = true;
   }
 
-  deleteItem(item: Game) {
-    const index = this.games.indexOf(item);
+  /**
+   * 選択したデータに紐づく情報をdataから削除する。
+   */
+  deleteItem(item: Game): void {
+    let index = this.games.findIndex(Game.equals, item);
     confirm("Are you sure you want to delete this item?") &&
       this.games.splice(index, 1);
   }
 
-  close() {
+  /**
+   * ダイアログ終了すると同時に、選択中データを格納する変数を初期化する。
+   */
+  close(): void {
     this.dialog = false;
     setTimeout(() => {
       this.editedItem = Object.assign({}, this.defaultItem);
@@ -169,7 +175,10 @@ export default class Games extends Vue {
     }, 300);
   }
 
-  save() {
+  /**
+   * ダイアログで更新したデータを変数に格納する。
+   */
+  save(): void {
     // 更新
     if (this.editedIndex > -1) {
       let editItemId = this.editedItem.id;
@@ -200,6 +209,9 @@ export default class Games extends Vue {
     this.close();
   }
 
+  /**
+   * Firebaseから必要な初期表示情報を取得する。
+   */
   created(): void {
     firebase
       .database()
@@ -209,6 +221,9 @@ export default class Games extends Vue {
       });
   }
 
+  /**
+   * Firebaseにgamesを更新する。
+   */
   saveGames(): void {
     firebase
       .database()
@@ -223,5 +238,3 @@ export default class Games extends Vue {
   }
 }
 </script>
-
-<style scoped></style>
