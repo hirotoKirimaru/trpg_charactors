@@ -12,11 +12,11 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/admin",
+      name: "admin",
+      component: () => import(/* webpackChunkName: "admin" */ "./components/AdminGames.vue")
     }
-    // {
-    //   path: "/home",
-    //   name: "home",
-    //   component: () => import(/* webpackChunkName: "home" */ "./views/Home.vue")
-    // }
   ]
 });
