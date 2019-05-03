@@ -16,7 +16,8 @@ export default new Router({
     {
       path: "/admin",
       name: "admin",
-      component: () => import(/* webpackChunkName: "admin" */ "./components/AdminGames.vue")
+      component: () =>
+        import(/* webpackChunkName: "admin" */ "./components/AdminGames.vue")
     }
   ]
 });
