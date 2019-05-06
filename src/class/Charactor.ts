@@ -2,13 +2,13 @@ export default class Charactor {
   id: number;
   gameId: number;
   name: String;
-  key: String;
+  url: String;
 
-  constructor(id: number, gameId: number, name: String, key: String) {
+  constructor(id: number, gameId: number, name: String, url: String) {
     this.id = id;
     this.gameId = gameId;
     this.name = name;
-    this.key = key;
+    this.url = url;
   }
 
   /**
@@ -41,7 +41,7 @@ export default class Charactor {
       element.id === item.id &&
       element.gameId === item.gameId &&
       element.name === item.name &&
-      element.key === item.key
+      element.url === item.url
     );
   }
 }

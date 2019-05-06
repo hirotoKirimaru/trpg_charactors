@@ -34,8 +34,8 @@
                 </v-flex>
                 <v-flex xs12 sm6 md4>
                   <v-text-field
-                    v-model="editedItem.key"
-                    label="key"
+                    v-model="editedItem.url"
+                    label="url"
                   ></v-text-field>
                 </v-flex>
               </v-layout>

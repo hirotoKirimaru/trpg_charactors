@@ -9,7 +9,7 @@
       <template v-slot:items="props">
         <td>{{ props.item.name }}</td>
         <td>
-          <a :href="props.item.page">{{ props.item.page }}</a>
+          <a :href="props.item.page" target="blank">{{ props.item.page }}</a>
         </td>
       </template>
       <template v-slot:no-data> </template>
