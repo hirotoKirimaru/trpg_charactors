@@ -53,7 +53,9 @@
     <v-data-table :headers="headers" :items="charactors" class="elevation-1">
       <template v-slot:items="props">
         <td>{{ getNameById(props.item.gameId) }}</td>
-        <td>{{ props.item.name }}</td>
+        <td>
+          <a :href="props.item.url" target="blank">{{ props.item.name }}</a>
+        </td>
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item)">
             edit
