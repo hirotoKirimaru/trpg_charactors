@@ -120,8 +120,9 @@ export default class Charactors extends Vue {
    */
   deleteItem(item: Charactor) {
     const index = this.charactors.indexOf(item);
-    confirm("Are you sure you want to delete this item?") &&
-      this.charactors.splice(index, 1);
+    confirm("削除してもよろしいですか？") && this.charactors.splice(index, 1);
+
+    this.saveCharactors();
   }
   /**
    * ダイアログ終了すると同時に、選択中データを格納する変数を初期化する。
@@ -143,10 +144,15 @@ export default class Charactors extends Vue {
     if (this.editedIndex > -1) {
       Object.assign(this.charactors[this.editedIndex], this.editedItem);
     } else {
-      let maxId: number = this.charactors.reduce((a, b) =>
-        a.id > b.id ? a : b
-      ).id;
-      this.editedItem.id = ++maxId;
+      let maxId: number;
+      if (this.charactors.length == 0) {
+        maxId = 0;
+      } else {
+        maxId = this.charactors.reduce((a, b) => (a.id > b.id ? a : b)).id;
+        ++maxId;
+      }
+
+      this.editedItem.id = maxId;
 
       this.charactors.push(this.editedItem);
     }
@@ -164,6 +170,9 @@ export default class Charactors extends Vue {
       .database()
       .ref("charactors/" + this.$store.getters.user.uid)
       .on("value", result => {
+        if (result == null || result.val() == null) {
+          return;
+        }
         this.charactors = result!.val();
       });
   }
