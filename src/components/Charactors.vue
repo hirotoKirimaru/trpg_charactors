@@ -6,7 +6,6 @@
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on }">
-          <v-btn color="primary" @click="saveCharactors">Save</v-btn>
           <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
         </template>
         <v-card>
@@ -151,6 +150,9 @@ export default class Charactors extends Vue {
 
       this.charactors.push(this.editedItem);
     }
+
+    this.saveCharactors();
+
     this.close();
   }
 
