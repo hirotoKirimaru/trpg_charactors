@@ -8,7 +8,7 @@ workflows:
     jobs:
       #- humanCheck:
       #    type: approval #人によるチェック
-      - deploy
+      - deploy:
           filters:
             branches:
               only: master 
