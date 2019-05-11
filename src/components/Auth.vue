@@ -3,7 +3,7 @@
     <v-layout v-if="userStatus" key="login" row>
       <v-flex xs2>
         <v-btn color="info" @click="doLogout">
-          Sign out
+          SIGN OUT
         </v-btn>
       </v-flex>
       <v-flex xs2>
@@ -13,7 +13,7 @@
     <v-layout v-else key="logout" row>
       <v-flex justify-left xs2>
         <v-btn color="info" @click="doLogin">
-          Sign in with Google
+          SIGN IN
         </v-btn>
       </v-flex>
     </v-layout>
