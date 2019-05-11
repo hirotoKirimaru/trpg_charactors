@@ -9,6 +9,10 @@ workflows:
       #- humanCheck:
       #    type: approval #人によるチェック
       - deploy
+        filters:
+          branches:
+            only:
+              - master 
       # - deploy:
       #    requires:
       #      - humanCheck
