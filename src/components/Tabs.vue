@@ -1,8 +1,12 @@
 <template>
   <v-tabs color="cyan" dark slider-color="yellow">
-    <v-tab v-for="(item, index) in items" :key="index" ripple>{{
-      item.name
-    }}</v-tab>
+    <v-tab
+      v-for="(item, index) in items"
+      :key="index"
+      ripple
+      @click="transition(item.url)"
+      >{{ item.name }}</v-tab
+    >
   </v-tabs>
 </template>
 
@@ -26,5 +30,9 @@ export default class Auth extends Vue {
       url: "/etc"
     }
   ];
+
+  transition(url: string) {
+    this.$router.push(url);
+  }
 }
 </script>
