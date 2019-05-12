@@ -77,13 +77,11 @@ import "firebase/database";
 import Charactor from "@/class/Charactor";
 import Game from "@/class/Game";
 
-// created
 Component.registerHooks(["created"]);
 
 @Component
 export default class Charactors extends Vue {
-  @Prop() games!: Array<Game>;
-
+  games: Array<Game> = [];
   dialog: boolean = false;
   headers: any = [
     { text: "ゲーム名", value: "game" },
@@ -166,6 +164,8 @@ export default class Charactors extends Vue {
    * Firebaseから必要な初期表示情報を取得する。
    */
   created(): void {
+    this.games = this.$store.getters.games;
+
     firebase
       .database()
       .ref("charactors/" + this.$store.getters.user.uid)

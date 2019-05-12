@@ -18,20 +18,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Watch, Vue } from "vue-property-decorator";
-import * as firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/database";
+import { Component, Vue } from "vue-property-decorator";
 import Game from "@/class/Game";
+
+Component.registerHooks(["created"]);
 
 @Component
 export default class Games extends Vue {
-  @Prop() games!: Array<Game>;
-
+  games: Array<Game> = [];
   dialog: boolean = false;
   headers: any = [
     { text: "ゲーム名", value: "name" },
     { text: "キャラメイクページ", value: "page" }
   ];
+
+  created(): void {
+    this.games = this.$store.getters.games;
+  }
 }
 </script>
