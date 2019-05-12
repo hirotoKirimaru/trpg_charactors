@@ -11,6 +11,7 @@ export default new Router({
     {
       path: "/",
       name: "home",
+      alias: "/games",
       component: Home
     },
     {
