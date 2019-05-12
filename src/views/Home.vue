@@ -19,9 +19,6 @@ import "firebase/auth";
 import "firebase/database";
 import Game from "@/class/Game";
 
-// created
-Component.registerHooks(["created"]);
-
 @Component({
   components: {
     Games,
@@ -33,18 +30,6 @@ export default class Home extends Vue {
 
   get userStatus(): boolean {
     return this.$store.getters.isSignedIn;
-  }
-
-  /**
-   * Firebaseから必要な初期表示情報を取得する。
-   */
-  created(): void {
-    firebase
-      .database()
-      .ref("games")
-      .on("value", result => {
-        this.games = result!.val();
-      });
   }
 }
 </script>

@@ -19,11 +19,11 @@ export default class Auth extends Vue {
   items: any = [
     {
       name: "Game",
-      url: "/game"
+      url: "/games"
     },
     {
       name: "Charactor",
-      url: "/charactor"
+      url: "/charactors"
     },
     {
       name: "Etc.",
