@@ -18,16 +18,16 @@ import Firebase from "@/firebase.ts";
 export default class Auth extends Vue {
   items: any = [
     {
+      name: "Home",
+      url: "/home"
+    },
+    {
       name: "Game",
       url: "/games"
     },
     {
       name: "Charactor",
       url: "/charactors"
-    },
-    {
-      name: "Etc.",
-      url: "/etc"
     }
   ];
 

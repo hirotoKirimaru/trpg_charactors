@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Games from "./components/Games.vue";
+import Home from "./views/HomeView.vue";
 
 Vue.use(Router);
 
@@ -10,9 +10,9 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "games",
-      alias: "/games",
-      component: Games
+      name: "home",
+      alias: "/home",
+      component: Home
     },
     {
       path: "/admin",
@@ -24,9 +24,13 @@ export default new Router({
       path: "/charactors",
       name: "charactors",
       component: () =>
-        import(
-          /* webpackChunkName: "charactor" */ "./components/Charactors.vue"
-        )
+        import(/* webpackChunkName: "charactor" */ "./views/CharactorsView.vue")
+    },
+    {
+      path: "/games",
+      name: "games",
+      component: () =>
+        import(/* webpackChunkName: "games" */ "./views/GamesView.vue")
     }
   ]
 });
