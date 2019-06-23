@@ -9,7 +9,8 @@
     "test": "yarn test:e2e && yarn test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "buid-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "core-js": "^2.6.5",
@@ -45,6 +46,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "firebase-tools": "^6.7.2",
     "lint-staged": "^8.1.5",
+    "story2sketch": "^1.6.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "ts-jest": "^23.0.0",
