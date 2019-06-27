@@ -10,7 +10,8 @@
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "buid-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "2sketch":"story2sketch  "
   },
   "dependencies": {
     "core-js": "^2.6.5",
