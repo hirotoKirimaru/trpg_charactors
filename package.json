@@ -11,7 +11,8 @@
     "test:unit": "vue-cli-service test:unit",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build-storybook": "build-storybook -s public",
-    "2sketch":"story2sketch  "
+    "2sketch": "story2sketch  ",
+    "deploy": "firebase deploy"
   },
   "dependencies": {
     "core-js": "^2.6.5",
