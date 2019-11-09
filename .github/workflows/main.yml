@@ -35,8 +35,5 @@ jobs:
         with:
           name: dist
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting:prod
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+        ./node_modules/.bin/firebase deploy --token=${{ secrets.FIREBASE_TOKEN }}
