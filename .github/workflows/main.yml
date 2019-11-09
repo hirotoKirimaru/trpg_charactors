@@ -23,6 +23,9 @@ jobs:
         with:
           name: dist
           path: dist
+      - name: deploy to Firebase Hosting
+        run: |
+          ./node_modules/.bin/firebase deploy --token=${{ secrets.FIREBASE_TOKEN }}
   deploy:
     name: Deploy
     needs: build
