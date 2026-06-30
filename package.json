@@ -27,7 +27,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/core": "^7.29.6",
     "@storybook/vue": "^7.6.24",
     "@types/jest": "^23.1.4",
     "@vue/cli-plugin-babel": "^5.0.9",
