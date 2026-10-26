@@ -15,8 +15,8 @@
 import { Component, Vue } from "vue-property-decorator";
 import Auth from "@/components/Auth.vue";
 import Tabs from "@/components/Tabs.vue";
-import * as firebase from "firebase/app";
-import "firebase/database";
+import firebase from "firebase/compat/app";
+import "firebase/compat/database";
 
 @Component({
   components: {

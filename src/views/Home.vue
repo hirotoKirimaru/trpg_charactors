@@ -14,9 +14,9 @@
 import { Component, Vue } from "vue-property-decorator";
 import Games from "@/components/Games.vue";
 import Charactors from "@/components/Charactors.vue";
-import * as firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/database";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/database";
 import Game from "@/class/Game";
 
 @Component({

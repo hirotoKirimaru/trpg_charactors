@@ -1,11 +1,11 @@
 import { createLocalVue, shallowMount } from "@vue/test-utils";
 import VueRouter from "vue-router";
 import Vuetify from "vuetify";
-import store from "@/store.ts";
+import store from "@/store";
 import Home from "@/views/Home.vue";
 
 describe("Function のテスト", () => {
-  let init: any = () => {
+  const init: any = () => {
     const routes = [{ path: "/", name: "home" }];
     const router = new VueRouter({ routes });
 
@@ -13,7 +13,7 @@ describe("Function のテスト", () => {
     localVue.use(VueRouter);
     localVue.use(Vuetify);
 
-    var wrapper = shallowMount(Home, {
+    const wrapper = shallowMount(Home, {
       localVue: localVue,
       router,
       store
@@ -24,14 +24,14 @@ describe("Function のテスト", () => {
   };
 
   describe("userStatus のテスト(なお、storeの設定変えてないのでデフォルト)", () => {
-    let tmpVm = init();
+    const tmpVm = init();
     expect(tmpVm.userStatus).toBe(false);
   });
 });
 
 describe("Template のテスト", () => {
   describe("内部は全部仮", () => {
-    let init: any = (editedIndex: number) => {
+    const init: any = (editedIndex: number) => {
       const routes = [{ path: "/", name: "home" }];
       const router = new VueRouter({ routes });
 
@@ -39,7 +39,7 @@ describe("Template のテスト", () => {
       localVue.use(VueRouter);
       localVue.use(Vuetify);
 
-      var wrapper = shallowMount(Home, {
+      const wrapper = shallowMount(Home, {
         localVue: localVue,
         router,
         store,

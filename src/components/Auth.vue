@@ -22,7 +22,9 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Firebase from "@/firebase.ts";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import Firebase from "@/firebase";
 
 // created
 Component.registerHooks(["created"]);

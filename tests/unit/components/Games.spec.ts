@@ -1,8 +1,8 @@
 import { createLocalVue, shallowMount } from "@vue/test-utils";
 import VueRouter from "vue-router";
 import Vuetify from "vuetify";
-import Firebase from "@/firebase.ts";
-import store from "@/store.ts";
+import Firebase from "@/firebase";
+import store from "@/store";
 import Games from "@/components/Games.vue";
 
 describe("Function のテスト", () => {
@@ -10,7 +10,7 @@ describe("Function のテスト", () => {
     Firebase.init();
   });
 
-  let init: any = () => {
+  const init: any = () => {
     const routes = [{ path: "/", name: "home" }];
     const router = new VueRouter({ routes });
 
@@ -18,7 +18,7 @@ describe("Function のテスト", () => {
     localVue.use(VueRouter);
     localVue.use(Vuetify);
 
-    var wrapper = shallowMount(Games, {
+    const wrapper = shallowMount(Games, {
       localVue: localVue,
       router,
       store
@@ -30,14 +30,14 @@ describe("Function のテスト", () => {
 
   describe("formTitle のテスト", () => {
     it("新規登録(editedindex -1)の場合、New Itemを取得する。", () => {
-      let tmpVm = init();
+      const tmpVm = init();
       tmpVm.$data.editedIndex = -1;
 
       expect(tmpVm.formTitle).toBe("New Item");
     });
 
     it("更新(editedindex 0以上)の場合、Edit Itemを取得する。", () => {
-      let tmpVm = init();
+      const tmpVm = init();
       tmpVm.$data.editedIndex = 0;
 
       expect(tmpVm.formTitle).toBe("Edit Item");
@@ -45,16 +45,16 @@ describe("Function のテスト", () => {
   });
 
   describe("editItem のテスト", () => {
-    let defaultEditedItem = {
+    const defaultEditedItem = {
       id: 0,
       name: "",
       page: ""
     };
 
     it("パラメータと完全一致するgameがない場合、editedIndexに-1を設定すること。", () => {
-      let tmpVm = init();
+      const tmpVm = init();
 
-      let param = {
+      const param = {
         id: 20,
         name: "test",
         page: "http://piyo"
@@ -72,8 +72,8 @@ describe("Function のテスト", () => {
     });
 
     it("パラメータと完全一致するgameがある場合、editedIndexを設定すること。", () => {
-      let tmpVm = init();
-      let games = [
+      const tmpVm = init();
+      const games = [
         {
           id: 0,
           name: "test-1",
@@ -83,7 +83,7 @@ describe("Function のテスト", () => {
       ];
       tmpVm.$data.games = games;
 
-      let param = {
+      const param = {
         id: 1,
         name: "test-2",
         page: "page-2"
@@ -101,8 +101,8 @@ describe("Function のテスト", () => {
     });
 
     it("パラメータとidが部分一致するgameがある場合、editedIndexを設定すること。", () => {
-      let tmpVm = init();
-      let games = [
+      const tmpVm = init();
+      const games = [
         {
           id: 0,
           name: "test-1",
@@ -112,7 +112,7 @@ describe("Function のテスト", () => {
       ];
       tmpVm.$data.games = games;
 
-      let param = {
+      const param = {
         id: 1,
         name: "test-2-2",
         page: "page-2-2"
@@ -133,7 +133,7 @@ describe("Function のテスト", () => {
 
 describe("Template のテスト", () => {
   describe("内部は全部仮", () => {
-    let init: any = (editedIndex: number) => {
+    const init: any = (editedIndex: number) => {
       const routes = [{ path: "/", name: "home" }];
       const router = new VueRouter({ routes });
 
@@ -141,7 +141,7 @@ describe("Template のテスト", () => {
       localVue.use(VueRouter);
       localVue.use(Vuetify);
 
-      var wrapper = shallowMount(Games, {
+      const wrapper = shallowMount(Games, {
         localVue: localVue,
         router,
         store,

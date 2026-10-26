@@ -22,8 +22,8 @@ export default class Game {
    * パラメータの this は Array.prototype.findIndex の第二引数にて渡す。
    */
   static equals(element: Game): boolean {
-    let unknown = this as unknown;
-    let id = unknown as number;
+    const unknown = this as unknown;
+    const id = unknown as number;
     return element.id === id;
   }
 
@@ -33,8 +33,8 @@ export default class Game {
    * パラメータの this は Array.prototype.findIndex の第二引数にて渡す。
    */
   static strictEquals(element: Game): boolean {
-    let unknown = this as unknown;
-    let item = unknown as Game;
+    const unknown = this as unknown;
+    const item = unknown as Game;
     return (
       element.id === item.id &&
       element.name === item.name &&

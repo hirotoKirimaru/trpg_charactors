@@ -1,8 +1,8 @@
-import * as firebase from "firebase/app";
-import "firebase/auth";
-import store from "@/store.ts";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import store from "@/store";
 
-var config = {
+const config = {
   apiKey: "AIzaSyD3v8zIgsV-EAYKByB_ty9hfEnHMdVrb4o",
   authDomain: "trpg-charactors.firebaseapp.com",
   databaseURL: "https://trpg-charactors.firebaseio.com",
@@ -34,7 +34,7 @@ export default {
       user = user ? user : null;
       store.commit("onAuthStateChanged", user);
 
-      let userStatus = user === null ? false : true;
+      const userStatus = user === null ? false : true;
       store.commit("onUserStatusChanged", userStatus);
     });
   }
